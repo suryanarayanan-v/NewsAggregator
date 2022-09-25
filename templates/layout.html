@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="static/css/styles.css" rel="stylesheet">
+    <title>News: {% block title %}{% endblock %}</title>
+</head>
+<body class="bg-darkGrey">
+    <nav class="bg-grey flex items-center justify-between flex-wrap p-6">
+        <div class="flex items-center flex-shrink mr-10">
+            <img src="static/images/logo.svg" alt="logo">
+        </div>
+        <div class="hidden w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+            <div class="pt-2 space-x-7 justify-start">
+                <a href="#" class="text-white text-xl">Countries</a>
+                <a href="#" class="text-white text-xl">Categories</a>
+            </div>
+        </div>
+        <div class="hidden md:flex space-x-7">
+            <a href="#" class="text-white text-xl pt-3">Log In</a>
+            <a href="#" class="text-white p-3 px-8 pt-2 bg-blue-700 hover:bg-blue-800 rounded-lg baseline text-2xl">Register</a>
+        </div>
+    </nav>
+
+    <main>
+        {% block main %}
+        {% endblock %}
+    </main>
+<script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+</body>
+</html>

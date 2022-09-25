@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block main %}
+    {% for topic in full_response %}
+        <!-- Card -->
+        <div class="card">
+
+        <!-- Card image -->
+        <div class="view overlay">
+            <a href="{{ topic['url'] }}">
+                <img class="card-img-top" alt="Card image cap"
+                     onerror="this.onerror=null; this .src='https://www.thermaxglobal.com/wp-content/uploads/2020/05/image-not-found.jpg';"
+                     src={{ topic['urlToImage'] }}>
+            </a>
+            <a href={{ topic['url'] }}>
+            <div class="mask rgba-white-slight"></div>
+            </a>
+            </div>
+
+        <!-- Card content -->
+            <div class="card-body">
+
+        <!-- Title -->
+                <h4><a class="link" href="{{ topic['url'] }}">{{ topic['title'] }}</a></h4>
+        <!-- Text -->
+                <p class="card-text">{{ topic['description'] }}</p>
+            </div>
+        </div>
+        <!-- Card -->
+        <br>
+    {% endfor %}
+{% endblock %}
