@@ -1,6 +1,9 @@
+import re
+
 import requests
 import os
 import datetime
+import sqlite3
 
 
 def lookup(query_type=None, query=None, country=None):
@@ -32,3 +35,28 @@ def lookup(query_type=None, query=None, country=None):
             article['content'] = ''
 
     return responseJson
+
+
+def addUserToNewsletter(emailID, frequency):
+    conn = sqlite3.connect('newsletter.db')
+    conn.execute('''CREATE TABLE IF NOT EXISTS ELIST (email TEXT UNIQUE, name TEXT, LASTSENT TEXT, FREQUENCY TEXT);''')
+    name = emailID.split("@")[0]
+    lastSent = datetime.date.today()
+    try:
+        conn.execute("INSERT INTO ELIST (email, name, lastsent, frequency) VALUES (?,?,?,?)",
+                     (emailID, name, lastSent, frequency))
+    except:
+        print('failed')
+
+    conn.row_factory = sqlite3.Row  # add this row
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM ELIST")
+    rows = cursor.fetchall()
+    for row in rows:
+        print(f"{row['email']}, {row['lastsent']}, {row['frequency']}.")
+
+    conn.commit()
+    conn.close()
+
+
+
